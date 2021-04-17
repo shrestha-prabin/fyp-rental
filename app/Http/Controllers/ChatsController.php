@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Validator;
 class ChatsController extends Controller
 {
     /**
-     * Get last message received/sent from/to each user
+     * Get all messages
      */
     public function getMessages()
     {
