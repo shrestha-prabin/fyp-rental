@@ -79,3 +79,13 @@ Route::group([
 ], function () {
     Route::post('/add-review', 'ReviewController@addReview');
 });
+
+
+Route::group([
+    'middleware' => 'auth.role:admin,seller,buyer',
+    'prefix' => 'message'
+], function () {
+    Route::post('/get-messages', 'ChatsController@getMessages');
+    Route::post('/chat-history', 'ChatsController@getChatHistory');
+    Route::post('/send-message', 'ChatsController@sendMessage');
+});

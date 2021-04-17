@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MessageEvent;
 use App\Models\ResponseModel;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -100,9 +101,9 @@ class AuthController extends Controller
      */
     public function userProfile()
     {
-        return ResponseModel::success([
+        return ResponseModel::success(
             Auth::user()
-        ]);
+        );
     }
 
     /**
