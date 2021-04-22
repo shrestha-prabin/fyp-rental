@@ -9,6 +9,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Auth;
 
 class MessageEvent implements ShouldBroadcast
 {
@@ -16,6 +17,7 @@ class MessageEvent implements ShouldBroadcast
 
     public $message;
     public $receiver_id;
+    public $sender_id;
 
     /**
      * Create a new event instance.
@@ -26,6 +28,7 @@ class MessageEvent implements ShouldBroadcast
     {
         $this->message = $message;
         $this->receiver_id = $receiver_id;
+        $this->sender_id = Auth::user()->id;
     }
 
     /**
@@ -35,7 +38,7 @@ class MessageEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['message-channel-'. $this->receiver_id];
+        return ['message-channel'];
     }
 
     public function broadcastAs()
