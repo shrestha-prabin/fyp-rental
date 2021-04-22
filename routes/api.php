@@ -85,6 +85,7 @@ Route::group([
     'middleware' => 'auth.role:admin,seller,buyer',
     'prefix' => 'message'
 ], function () {
+    Route::post('/friend-list', 'ChatsController@getFriendList');
     Route::post('/get-messages', 'ChatsController@getMessages');
     Route::post('/chat-history', 'ChatsController@getChatHistory');
     Route::post('/send-message', 'ChatsController@sendMessage');

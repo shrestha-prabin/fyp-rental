@@ -19,10 +19,33 @@ class ChatsController extends Controller
     public function getMessages()
     {
         return ResponseModel::success(
-            Message::with('sender:id,name', 'receiver:id,name')
+            Message::with('sender:id,name,email', 'receiver:id,name,email')
                 ->where('sender_id', Auth::user()->id)
                 ->orWhere('receiver_id', Auth::user()->id)
                 ->get()
+        );
+    }
+
+    public function getFriendList()
+    {
+        $user = Auth::user();
+
+        $data =  Message::with('sender:id,name,email', 'receiver:id,name,email')
+            ->where('sender_id', Auth::user()->id)
+            ->orWhere('receiver_id', Auth::user()->id)
+            ->get();
+
+        $friend_list = [];
+        foreach ($data as $item) {
+            if ($item->sender_id == $user->id) {
+                array_push($friend_list, $item->receiver);
+            } else {
+                array_push($friend_list, $item->sender);
+            } 
+        }
+
+        return ResponseModel::success(
+            array_values(array_unique($friend_list))
         );
     }
 
