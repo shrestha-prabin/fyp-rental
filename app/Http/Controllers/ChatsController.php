@@ -100,4 +100,41 @@ class ChatsController extends Controller
             'message' => 'Message sent!'
         ]);
     }
+
+    public function addFriend(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|email',
+        ]);
+
+        if ($validator->fails()) {
+            return ResponseModel::failed($validator->errors());
+        }
+
+        $friend = User::where('email', $request->email)->first();
+        if (!$friend) {
+            return ResponseModel::failed([
+                'message' => 'User not found'
+            ]);
+        }
+
+        $user = Auth::user();
+
+        if ($friend->id == $user->id) {
+            return ResponseModel::failed([
+                'message' => 'Cannot add user'
+            ]);
+        }
+
+
+        Message::create([
+            'sender_id' => $user->id,
+            'receiver_id' => $friend->id,
+            'message' => ''
+        ]);
+
+        return ResponseModel::success([
+            'message' => 'Success'
+        ]);
+    }
 }
