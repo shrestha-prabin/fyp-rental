@@ -15,6 +15,7 @@ class Apartment extends Model
         'location',
         'purpose',
         'type',
+        'bhk',
         'description',
         'price',
         'image'

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Apartment;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -37,6 +38,42 @@ class DatabaseSeeder extends Seeder
             'email' => 'buyer@email.com',
             'password' => bcrypt('111111'),
             'role' => 'buyer'
+        ]);
+
+        Apartment::create([
+            'seller_id' => '2',
+            'name' => 'Office Building',
+            'location' => 'Balaju',
+            'purpose' => 'Office Space',
+            'type' => 'Buy',
+            'bhk' => '3',
+            'description' => 'Occaecat consequat in et officia ullamco non incididunt ad laborum ad aute Lorem eiusmod.',
+            'price' => 1000,
+            'image' => ''
+        ]);
+
+        Apartment::create([
+            'seller_id' => '2',
+            'name' => 'Rental Office Building',
+            'location' => 'Naxal',
+            'purpose' => 'Office Space',
+            'type' => 'Rent',
+            'bhk' => '3',
+            'description' => 'Occaecat consequat in et officia ullamco non incididunt ad laborum ad aute Lorem eiusmod.',
+            'price' => 1000,
+            'image' => ''
+        ]);
+
+        Apartment::create([
+            'seller_id' => '2',
+            'name' => 'New Office Building',
+            'location' => 'Baneshwor',
+            'purpose' => 'Office Space',
+            'type' => 'Buy',
+            'bhk' => '1',
+            'description' => 'Occaecat consequat in et officia ullamco non incididunt ad laborum ad aute Lorem eiusmod.',
+            'price' => 2000,
+            'image' => ''
         ]);
     }
 }

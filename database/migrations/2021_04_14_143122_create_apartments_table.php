@@ -20,6 +20,7 @@ class CreateApartmentsTable extends Migration
             $table->string('location');
             $table->string('purpose');
             $table->string('type');
+            $table->integer('bhk');
             $table->text('description');
             $table->integer('price');
             $table->text('image');

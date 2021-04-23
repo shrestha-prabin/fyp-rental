@@ -24,6 +24,7 @@ class ApartmentController extends Controller
             'purpose' => 'required',
             'description' => 'required',
             'price' => 'required|int',
+            'bhk' => 'required|int',
             'image' => 'required|mimes:jpeg'
         ]);
 
@@ -57,6 +58,7 @@ class ApartmentController extends Controller
             'purpose' => 'required',
             'description' => 'required',
             'price' => 'required|int',
+            'bhk' => 'required|int',
             'image' => 'required|mimes:jpeg'
         ]);
 
@@ -89,6 +91,8 @@ class ApartmentController extends Controller
         $type = $request->type;
         $price_from = $request->price_from;
         $price_to = $request->price_to;
+        $location = $request->location;
+        $bhk = $request->bhk;
 
         $query = Apartment::with('seller:id,name,email,contact,address', 'reviews');
 
@@ -104,7 +108,15 @@ class ApartmentController extends Controller
             $query->where('price', '<=', $price_to);
         }
 
-        return $query
+        if ($location) {
+            $query->where('location', 'LIKE', "%{$location}%");
+        }
+        if ($bhk) {
+            $query->where('bhk', $bhk);
+        }
+
+
+        $data = $query
             ->get()
             ->map(function ($apartment) {
                 $apartment['image'] = Storage::url($apartment['image']);
@@ -113,26 +125,30 @@ class ApartmentController extends Controller
                 $total_rating = $reviews->reduce(function ($carry, $item) {
                     return $carry + $item->rating;
                 }, 0);
-                
+
                 if ($reviews->count() > 0)
-                    $apartment->rating = $total_rating/count($reviews);
+                    $apartment->rating = $total_rating / count($reviews);
                 else
                     $apartment->rating = 0;
 
                 return $apartment;
             });
+        return ResponseModel::success($data);
     }
 
     public function getUserApartments(Request $request)
     {
         $user = Auth::user();
-        return Apartment::where('seller_id', $user->id)
-            ->with('bookings', 'reviews')
-            ->get()
-            ->map(function ($apartment) {
-                $apartment['image'] = Storage::url($apartment['image']);
-                return $apartment;
-            });
+
+        return ResponseModel::success(
+            Apartment::where('seller_id', $user->id)
+                ->with('bookings', 'reviews')
+                ->get()
+                ->map(function ($apartment) {
+                    $apartment['image'] = Storage::url($apartment['image']);
+                    return $apartment;
+                })
+        );
     }
 
     private function saveFile($file, $name)
