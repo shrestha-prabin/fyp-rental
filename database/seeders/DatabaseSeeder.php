@@ -42,9 +42,31 @@ class DatabaseSeeder extends Seeder
 
         Apartment::create([
             'seller_id' => '2',
+            'name' => 'Residental Apartment',
+            'location' => 'Balaju',
+            'purpose' => 'Residental',
+            'type' => 'Buy',
+            'bhk' => '3',
+            'description' => 'Occaecat consequat in et officia ullamco non incididunt ad laborum ad aute Lorem eiusmod.',
+            'price' => 1000,
+            'image' => ''
+        ]);
+        Apartment::create([
+            'seller_id' => '2',
+            'name' => 'Residental Building',
+            'location' => 'Balaju',
+            'purpose' => 'Residental',
+            'type' => 'Buy',
+            'bhk' => '3',
+            'description' => 'Occaecat consequat in et officia ullamco non incididunt ad laborum ad aute Lorem eiusmod.',
+            'price' => 1000,
+            'image' => ''
+        ]);
+        Apartment::create([
+            'seller_id' => '2',
             'name' => 'Office Building',
             'location' => 'Balaju',
-            'purpose' => 'Office Space',
+            'purpose' => 'Office',
             'type' => 'Buy',
             'bhk' => '3',
             'description' => 'Occaecat consequat in et officia ullamco non incididunt ad laborum ad aute Lorem eiusmod.',
@@ -56,7 +78,7 @@ class DatabaseSeeder extends Seeder
             'seller_id' => '2',
             'name' => 'Rental Office Building',
             'location' => 'Naxal',
-            'purpose' => 'Office Space',
+            'purpose' => 'Office',
             'type' => 'Rent',
             'bhk' => '3',
             'description' => 'Occaecat consequat in et officia ullamco non incididunt ad laborum ad aute Lorem eiusmod.',
@@ -68,7 +90,7 @@ class DatabaseSeeder extends Seeder
             'seller_id' => '2',
             'name' => 'New Office Building',
             'location' => 'Baneshwor',
-            'purpose' => 'Office Space',
+            'purpose' => 'Office',
             'type' => 'Buy',
             'bhk' => '1',
             'description' => 'Occaecat consequat in et officia ullamco non incididunt ad laborum ad aute Lorem eiusmod.',
