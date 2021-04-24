@@ -28,9 +28,12 @@ class ReviewController extends Controller
         $review = Review::where('apartment_id', $request->apartment_id)
             ->where('buyer_id', $user->id)->first();
 
+
+
         if ($review) {
             $review->review_text = $request->review_text;
             $review->rating = $request->rating;
+            $review->save();
 
             return ResponseModel::success([
                 'message' => 'Review updated'
@@ -42,7 +45,7 @@ class ReviewController extends Controller
         ]));
 
         return ResponseModel::success([
-            'message' => 'Review added'
+            'message' => 'Review submitted'
         ]);
     }
 }

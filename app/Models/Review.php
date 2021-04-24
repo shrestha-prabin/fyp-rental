@@ -15,4 +15,8 @@ class Review extends Model
         'review_text',
         'rating'
     ];
+
+    public function reviewer() {
+        return $this->belongsTo(User::class, 'buyer_id');
+    }
 }

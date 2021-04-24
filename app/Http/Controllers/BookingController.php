@@ -54,10 +54,13 @@ class BookingController extends Controller
     {
         $user = Auth::user();
 
-        return Booking::with('apartment', 'buyer')
+        return ResponseModel::success(
+            Booking::with('apartment', 'buyer')
             ->whereHas('apartment', function ($q) use ($user) {
                 $q->where('seller_id', $user->id);
-            })->get();
+            })->get()
+        );
+
     }
 
     /**

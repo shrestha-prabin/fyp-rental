@@ -173,8 +173,9 @@ class ApartmentController extends Controller
 
     public function getApartmentDetails(Request $request)
     {
-        $details = Apartment::with('seller', 'bookings', 'reviews')->where('id', $request->id)->first();
+        $details = Apartment::with('seller', 'bookings', 'reviews', 'reviews.reviewer')->where('id', $request->id)->first();
         if ($details) {
+            $details['image'] = Storage::url($details['image']);
             return ResponseModel::success(
                 $details
             );
