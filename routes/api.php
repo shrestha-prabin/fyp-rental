@@ -37,6 +37,7 @@ Route::group([
     'prefix' => 'apartment'
 ], function () {
     Route::post('/all-apartments', 'ApartmentController@getAllApartments');
+    Route::post('/details', 'ApartmentController@getApartmentDetails');
     Route::post('/apartment-types', 'ApartmentController@getApartmentTypes');
 });
 

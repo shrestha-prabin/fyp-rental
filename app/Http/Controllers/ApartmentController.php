@@ -171,6 +171,20 @@ class ApartmentController extends Controller
             });
     }
 
+    public function getApartmentDetails(Request $request)
+    {
+        $details = Apartment::with('seller', 'bookings', 'reviews')->where('id', $request->id)->first();
+        if ($details) {
+            return ResponseModel::success(
+                $details
+            );
+        } else {
+            return ResponseModel::failed([
+                'message' => 'Not Found'
+            ]);
+        }
+    }
+
     public function deleteApartment(Request $request)
     {
         Apartment::find($request->apartment_id)->delete();
