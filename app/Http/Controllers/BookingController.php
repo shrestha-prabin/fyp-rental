@@ -41,9 +41,11 @@ class BookingController extends Controller
      */
     public function getUserBookings()
     {
-        return Booking::with('apartment', 'apartment.seller')
+        return ResponseModel::success(
+            Booking::with('apartment', 'apartment.seller')
             ->where('buyer_id', Auth::user()->id)
-            ->get();
+            ->get()
+        );
     }
 
     /**

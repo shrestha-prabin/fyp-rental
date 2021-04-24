@@ -24,6 +24,7 @@ class CreateApartmentsTable extends Migration
             $table->text('description');
             $table->integer('price');
             $table->text('image');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
