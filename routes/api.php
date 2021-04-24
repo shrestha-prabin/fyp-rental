@@ -92,3 +92,12 @@ Route::group([
     Route::post('/chat-history', 'ChatsController@getChatHistory');
     Route::post('/send-message', 'ChatsController@sendMessage');
 });
+
+Route::group([
+    'middleware' => 'auth.role:admin',
+    'prefix' => 'user'
+], function () {
+    Route::post('/user-list', 'AuthController@getUserList');
+    Route::post('/delete-user', 'AuthController@deleteUser');
+});
+

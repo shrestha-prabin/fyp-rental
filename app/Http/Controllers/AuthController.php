@@ -123,4 +123,21 @@ class AuthController extends Controller
         ]);
     }
 
+    public function getUserList(Request $request)
+    {
+        return ResponseModel::success(
+            User::all()
+        );
+    }
+
+    public function deleteUser(Request $request)
+    {
+        $userId = $request->user_id;
+
+        User::findorfail($userId)->delete();
+
+        return ResponseModel::success([
+            'message' => 'User Deleted'
+        ]);
+    }
 }
